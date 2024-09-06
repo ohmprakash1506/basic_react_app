@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing Node.js
+      - curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+      - sudo apt-get install -y nodejs
+      - npm install -g yarn
+
+  pre_build:
+    commands:
+      - echo Installing dependencies...
+      - yarn install
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - yarn build
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: build
+  discard-paths: yes
